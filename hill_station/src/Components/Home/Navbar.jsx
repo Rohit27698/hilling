@@ -21,28 +21,37 @@ import {
 import { Link as ReactRouterLink } from 'react-router-dom'; // Import React Router's Link component
 import Logo from "./Images/Logo.jpg";
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
   const [name, setName] = useState("")
-  const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("auth")));
-
   const linkColor = useColorModeValue('white', 'gray.200');
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
-  useEffect(() => {
-    const getName = JSON.parse(localStorage.getItem("user"));
-
-    if (auth && getName) {
-      setName(getName.name);
+  const [auth, setAuth] = useState(false);
+  const [getData, setGetData] = useState([])
+  async function getLoginData() {
+    try {
+      const getItem = await axios.get(`http://localhost:8080/navName`);
+      setAuth(true)
+      setGetData(getItem.data);
+    } catch (error) {
+      
     }
-  }, [auth,name]);
-
-  function onLogout() {
-    localStorage.removeItem("auth");
-    setAuth(null); // Clear the auth state
   }
-  console.log();
+  useEffect(() => {
+    getLoginData()
+  }, [])
+  async function onLogout() { 
+    try {
+      await axios.delete(`http://localhost:8080/navName/1`);
+      setAuth(false)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  console.log(auth);
   return (
     <Box>
       <Flex
@@ -115,7 +124,10 @@ export default function Navbar() {
       // paddingLeft={'10px'}
       // paddingRight={'10px'}
     >
-      {name}
+      {getData.map((e)=>(
+        <h1 key={e.id}>{e.name}</h1>
+
+      ))}
     </Box>
     
     <Button colorScheme="pink" onClick={onLogout}>

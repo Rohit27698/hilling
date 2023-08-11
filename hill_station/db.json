@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "email": "",
+      "password": "",
+      "name": "",
+      "lastname": "",
+      "confirmpassword": ""
+    },
+    {
+      "email": "admin@thismail.com",
+      "password": "123",
+      "name": "Saif",
+      "lastname": "Khan",
+      "confirmpassword": "123",
+      "id": 2
+    },
+    {
+      "email": "saiftech.it123@gmail.com",
+      "password": "1234",
+      "name": "mr",
+      "lastname": "khan",
+      "confirmpassword": "1234",
+      "id": 3
+    }
+  ],
+  "navName": []
+}

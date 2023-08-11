@@ -14,9 +14,10 @@ import {
   } from '@chakra-ui/react';
 
 
-  import { useContext, useState } from "react";
+  import { useContext,useEffect,useState } from "react";
   import { useNavigate ,Link} from "react-router-dom";
   import { AuthContext } from "../../ContextApi/AuthcontextProvider";
+  import axios from 'axios';
   
   
   export default function Login() {
@@ -26,36 +27,59 @@ import {
     const toast=useToast();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-  
+    const [getData, setGetData] = useState([])
+    const [auth, setAuth] = useState(false)
+    async function getLoginData() {
+      try {
+        const getItem = await axios.get(`http://localhost:8080/posts`);
+        setGetData(getItem.data);
+      } catch (error) {
+        
+      }
+    }
+    useEffect(() => {
+      getLoginData()
+    }, [])
     const handleLogin = (e) => {
       e.preventDefault();
-      const userData = JSON.parse(localStorage.getItem("user"));
-      if(userData){
-        if(userData.email === email && userData.password === password){
-          localStorage.setItem("auth", JSON.stringify(true))
-          toast({
-            title: 'Welcome to HILLING TRAVEL AGENCY.',
-            status: 'success',
-            duration: 2000,
-            isClosable: true,
-          })
-          login()
-          Navigate("/")
-
-          
-        }else if (userData.email !==email || userData.password!==password){
-          toast({
-            title: 'Please Check your Email & Password',
-            status: 'error',
-            position:'top',
-            duration: 2000,
-            isClosable: true,
-          })
-        }
+      // console.log(getData);
+     async function loginName(val) {
+      const obj = {
+        name:val
+      }
+      try {
+        await axios.post(`http://localhost:8080/navName`,obj)
+        getLoginData()
+      } catch (error) {
+        console.log(error);
+      }
+      }
+   getData?.map((e)=>{
+          console.log(e.email === email && e.password === password);
+          console.log(e.password);
+          if(e.email === email && e.password === password){
+            setAuth(true)
+  
+            toast({
+              title: 'Welcome to HILLING TRAVEL AGENCY.',
+              status: 'success',
+              duration: 2000,
+              isClosable: true,
+            })
+            Navigate("/")
+            loginName(e.name)
+          }
+        })
+        if(!auth){
+            toast({
+              title: 'Please Check your Email & Password',
+              status: 'error',
+              position:'top',
+              duration: 1000,
+              isClosable: true,
+            })
         }
     };
-
-
 
     return (
       <Flex

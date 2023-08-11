@@ -18,19 +18,20 @@ import {
   import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
   import {Link,useNavigate} from "react-router-dom"
   import Login from './Login';
-  
+  import axios from "axios";
   
   export default function Signup() {
     const [showPassword, setShowPassword] = useState(false);
     const navigate=useNavigate();
     const toast=useToast();
-    const [newUsername, setNewUsername] = useState({
+    const user_data = {
       email: "",
       password: "",
       name: "",
       lastname:"",
       confirmpassword:""
-    });
+    }
+    const [newUsername, setNewUsername] = useState(user_data);
     const handleSignup=(e)=>{
       e.preventDefault();
 
@@ -64,10 +65,12 @@ import {
           isClosable: true,
         })
       } 
-      localStorage.setItem("user", JSON.stringify(newUsername))
+      postData();
      
     }
-  
+  async function postData() {
+    await axios.post(`http://localhost:8080/posts`,newUsername).then((res)=>console.log())
+  }
     return (
       <Flex
         minH={'100vh'}
@@ -107,6 +110,8 @@ import {
                     style={{width:"200px"}}
                      variant="filled"
                      bg={"purple.50"}
+                     value={newUsername.lastname}
+                      onChange={(e) => setNewUsername({...newUsername, lastname:e.target.value})}
                      />
                   </FormControl>
                 </Box>
