@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import { Payment } from './components/payment';
+import Payment from './components/paymentAndAdress/Payment';
+
 
 function App() {
   return (
     <div className="App">
-     <Payment/>
+      <Payment/>
+     
     </div>
   );
 }
