@@ -14,6 +14,7 @@ import {
   Grid,
   Select,
   Stack,
+  Flex
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
@@ -24,8 +25,19 @@ const OurWorld = () => {
   const [filterByRating, setFilterByRating] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+
   const fetchData = async () => {
-    const res = await axios.get("https://database-aliu.onrender.com/property");
+    const url = (`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}`)
+    let last = '/property'
+    const qp = [];
+    if (searchResults) {
+      qp.push(`q=${searchResults}`)
+    }
+    if (qp.length > 0) {
+      last += `?${qp.join('&')}`
+    }
+    const res = await axios.get(url+last);
+    
     setProperties(res.data);
   };
 
@@ -67,96 +79,30 @@ const OurWorld = () => {
       return 0;
     }
   });
-
-  // useEffect(() => {
-  //   const delayDebounceFn = setTimeout(() => {
-  //     fetchData();
-  //   }, 1000);
-
-  //   return () => clearTimeout(delayDebounceFn);
-  // }, [setSearchTerm]);
-
   useEffect(() => {
     fetchData();
   }, [searchResults]);
 
   return (
-    <>
+    <div style={{backgroundColor:'#1a1d2c' ,color:'white'}}>
       <Box
-        p={{ base: "40px 20px", md: "90px 210px" }}
-        backgroundColor={"rgb(124, 141, 211)"}
+        p={{ base: "10px 20px", md: "20px 50px" }}
+        backgroundColor={"#1a1d2c"}
         textAlign={"left"}
       >
         <Box color={"white"}>
-          <Text fontSize={{ base: "3xl", md: "5xl" }} fontWeight={700}>
+          <Text fontSize={{ base: "xxxxs", md: "2xl" }} fontWeight={700}>
             Find your next stay
           </Text>
-          <Text fontSize={{ base: "2xl", md: "3xl" }}>
+          <Text fontSize={{ base: "2xl", md: "xl" }}>
             Search low prices on hotels, homes and much more...
           </Text>
         </Box>
-        <Center mt="50px">
-          <Box h="69px">
-            <HStack
-              bg={"white"}
-              p="3px"
-              borderRadius={"10px"}
-              gap={"2px"}
-              direction={{ base: "column", md: "row" }}
-              spacing={{ base: "10px", md: "2px" }}
-            >
-              <Input
-                borderWidth="3px"
-                borderColor="gray.300"
-                width={{ base: "100%", md: "30%" }}
-                variant={"outline"}
-                placeholder="Where are you going?"
-                size="lg"
-                color="black"
-                bg="white"
-                onChange={(event) => setSearchTerm(event.target.value)}
-              />
-              <Input
-                borderWidth="3px"
-                borderColor="gray.300"
-                width={{ base: "100%", md: "382px" }}
-                placeholder="Select Date and Time"
-                size="lg"
-                type="date"
-                bg="white"
-              />
-              <Input
-                borderWidth="3px"
-                borderColor="gray.300"
-                width={{ base: "100%", md: "350px" }}
-                placeholder="No of persons "
-                size="lg"
-                bg="white"
-              />
-              <Button
-                fontSize={"20px"}
-                size="lg"
-                backgroundColor={"orange"}
-                color={"white"}
-                padding={{ base: "5px", md: "2px" }}
-                width={{ base: "100%", md: "130px" }}
-                borderRadius={"8px"}
-                onClick={handleSearch}
-              >
-                Search
-              </Button>
-            </HStack>
-            {/* <Center> */}
-            <HStack mt="50px">
-              <Text
-                fontSize="3xl"
-                mr="30px"
-                color={"white"}
-                fontWeight={"600"}
-                direction={{ base: "column", md: "row" }}
-              >
-                Sort by:{" "}
-              </Text>
+      </Box>
+      <Flex justifyContent={'space-around'}>
+   
+            <Flex  mt={'20px'}>
+             
               <Select
                 borderWidth="3px"
                 borderColor="gray.300"
@@ -164,12 +110,13 @@ const OurWorld = () => {
                 placeholder="Sort by Price"
                 size="lg"
                 fontSize={{ base: "16px", md: "20px" }}
+                textColor={'orange'}
+                
                 value={filterByPrice}
                 onChange={handleFilterByPrice}
               >
-                <option value="">None</option>
-                <option value="lowToHigh">Price (Low to High)</option>
-                <option value="highToLow">Price (High to Low)</option>
+                <option  value="lowToHigh">Price (Low to High)</option>
+                <option   value="highToLow">Price (High to Low)</option>
               </Select>
               <Select
                 borderWidth="3px"
@@ -177,40 +124,44 @@ const OurWorld = () => {
                 width={{ base: "100%", md: "250px" }}
                 placeholder="Sort by Ratings"
                 size="lg"
+                color={'orange'}
                 fontSize={{ base: "16px", md: "20px" }}
                 value={filterByRating}
                 onChange={handleFilterByRating}
-              >
-                <option value="">None</option>
-                <option value="lowToHigh">Rating (Low to High)</option>
+              ><option value="lowToHigh">Rating (Low to High)</option>
                 <option value="highToLow">Rating (High to Low)</option>
               </Select>
-            </HStack>
-            {/* </Center> */}
-          </Box>
-        </Center>
-      </Box>
-      <Stack>
-        <Text fontSize="4xl" fontWeight={"700"} bg={"orange"}>
-          Showing Hotels in{" "}
-          {searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1)}
-        </Text>
-      </Stack>
+            </Flex>
+            <Box gap={'10px'}>
+            <Input mt={'20px'}
+            mr={'20px'}
+                borderWidth="3px"
+                borderColor="gray.300"
+                width={"400px"}
+                variant={"outline"}
+                placeholder="Where are you going?"
+                size="lg"
+                color="black"
+                bg="white"
+                onChange={(event) => setSearchTerm(event.target.value)}
+               
+              />
+            </Box>
+             
+      </Flex>
       <Grid
-      paddingTop={"40px"}
+      paddingTop={"15px"}
         templateColumns="repeat(3, 1fr)"
         gap={1}
         columns={{ base: 1, sm: 2, md: 3 }}
         spacing={1}
-        // mt={{ base: 4, md: 8 }}
-        //  padding="50px 80px"
       >
         {sortedProperties.map((property) => (
           <GridItem
             key={property.id}
-            bg="#edf3f8"
+            bg="#1a1d2c"
             _dark={{
-              bg: "#3e3e3e",
+              bg: "#1a1d2c",
             }}
             p={50}
             w="full"
@@ -226,7 +177,6 @@ const OurWorld = () => {
               borderWidth="1px"
               rounded="lg"
               shadow="lg"
-              // margin="-30px -30px"
             >
               <Image
                 src={property.imageUrl}
@@ -258,14 +208,14 @@ const OurWorld = () => {
                   lineHeight="tight"
                   noOfLines={1}
                   textAlign={"left"}
+                  color={'black'}
                 >
                   {property.title}
                 </Text>
 
-                <Box textAlign={"left"} ml="2px">
-                  {property.formattedPrice}
+                <Box textAlign={"left"} ml="2px" color={'teal'}> 
+                ₹ {property.formattedPrice}
                   <Box as="span" color="gray.600" fontSize="sm">
-                    / wk
                   </Box>
                 </Box>
 
@@ -275,7 +225,7 @@ const OurWorld = () => {
                     .map((_, i) => (
                       <StarIcon
                         key={i}
-                        color={i < property.rating ? "teal.500" : "gray.300"}
+                        color={i < property.rating ? "green" : "gray.300"}
                       />
                     ))}
                   <Box as="span" ml="2" color="gray.600" fontSize="sm">
@@ -302,7 +252,7 @@ const OurWorld = () => {
           </GridItem>
         ))}
       </Grid>
-    </>
+    </div>
   );
 };
 

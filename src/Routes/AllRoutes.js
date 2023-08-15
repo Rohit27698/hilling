@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../Components/Home/Home";
 import OurWorld from "../Components/OurWorld/OurWorld";
@@ -11,8 +11,10 @@ import AddBlog from "../Components/Blog/AddBlog";
 import AddressPage from "../Components/paymentAndAdress/AddressPage";
 import Payment from "../Components/paymentAndAdress/Payment";
 import LoadingPage from "../Components/paymentAndAdress/LoadingPage";
+import { AuthContext } from "../ContextApi/AuthcontextProvider";
 
 const AllRoutes = () => {
+  const {isLogged}=useContext(AuthContext)
   return (
     <Routes>
       <Route path="/" element={<Home />}>
@@ -30,7 +32,8 @@ const AllRoutes = () => {
       <Route path="/login" element={<Login />}>
         Login
       </Route>
-      <Route path="/address" element={<AddressPage />}>
+      {
+        isLogged ?<><Route path="/address" element={<AddressPage />}>
         Address
       </Route>
       <Route path="/payment" element={<Payment />}>
@@ -38,7 +41,10 @@ const AllRoutes = () => {
       </Route>
       <Route path="/LoadingPage" element={<LoadingPage />}>
         Payment
-      </Route>
+      </Route></>:""
+
+        
+      }
       <Route path="/blog" element={<Blog />}>
         Blog
       </Route>
@@ -47,6 +53,8 @@ const AllRoutes = () => {
       </Route>
       <Route path="/addBlog" element={<AddBlog />}>
         Add Blog
+      </Route>
+      <Route path="/*" element={<Home />}>
       </Route>
     </Routes>
   );

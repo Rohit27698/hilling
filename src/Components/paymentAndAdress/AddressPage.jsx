@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Box, FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import './AddressPage.css'
+import { useNavigate } from 'react-router-dom';
 
 const AddressPage = (  ) => {
+  const nav=useNavigate()
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -51,7 +53,7 @@ const AddressPage = (  ) => {
     setZipcode(event.target.value);
   };
   const handleClick=()=>{
-    window.open("./Payment", '_self');
+    nav('/payment')
   }
  
   const isAddressEmpty = firstName.trim()==='' || lastName.trim()===''||phoneNumber.trim()===''||dateOfBirth.trim()===''||state.trim()===''||email.trim()===''||city.trim()===''||zipcode.trim()===''||address.trim()==='';

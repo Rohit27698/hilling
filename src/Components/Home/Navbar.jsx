@@ -38,7 +38,7 @@ export default function Navbar() {
       <Flex
         backgroundColor={useColorModeValue('rgb(124, 141, 211)', 'gray.800')}
         color={useColorModeValue('white', 'white')}
-        minH={'60px'}
+        h={'50px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
@@ -67,7 +67,7 @@ export default function Navbar() {
             color={useColorModeValue('gray.800', 'white')}
           >
             <ReactRouterLink to="/"> {/* Use React Router's Link component */}
-              <img src={Logo} alt="" />
+              <img style={{width:'130px'}}src={Logo} alt="" />
             </ReactRouterLink>
           </Text>
 
@@ -122,7 +122,7 @@ export default function Navbar() {
         textAlign={"center"}>
           <Heading fontSize={'20px'}
           mt={'10px'}
-          fontFamily={"popins"} >{logUser}</Heading>
+          fontFamily={"popins"} color={'#1a1d2c'} >{logUser}</Heading>
           <Button  display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
@@ -230,7 +230,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 const MobileNav = () => {
   return (
-    <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
+    <Stack bg={useColorModeValue('#1a1d2c', 'gray.800')} p={4} display={{ md: 'none' }}>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
