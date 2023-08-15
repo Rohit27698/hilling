@@ -18,46 +18,36 @@ const AllRoutes = () => {
       <Route path="/" element={<Home />}>
         Home
       </Route>{" "}
-      {/* Shailesh*/}
       <Route path="/ourworlds" element={<OurWorld />}>
         service and product details page
       </Route>{" "}
-      {/* gaurav*/}
       <Route path="/ourworlds/:id" element={<OurWorldDetails />}>
         Product Details page
-      </Route>{" "}
-      {/* gaurav*/}
+      </Route>
       <Route path="/signup" element={<Signup />}>
         Signup
-      </Route>{" "}
-      {/* Akash*/}
+      </Route>
       <Route path="/login" element={<Login />}>
         Login
-      </Route>{" "}
-      {/* Akash*/}
+      </Route>
       <Route path="/address" element={<AddressPage />}>
         Address
-      </Route>{" "}
-      {/* Akhil*/}
+      </Route>
       <Route path="/payment" element={<Payment />}>
         Payment
-      </Route>{" "}
+      </Route>
       <Route path="/LoadingPage" element={<LoadingPage />}>
         Payment
-      </Route>{" "}
-      {/* Akhil*/}
+      </Route>
       <Route path="/blog" element={<Blog />}>
         Blog
-      </Route>{" "}
-      {/*Rishabh */}
+      </Route>
       <Route path="/blog/:id" element={<BlogPost />}>
         BlogPost
-      </Route>{" "}
-      {/*Rishabh */}
+      </Route>
       <Route path="/addBlog" element={<AddBlog />}>
         Add Blog
-      </Route>{" "}
-      {/*Rishabh */}
+      </Route>
     </Routes>
   );
 };

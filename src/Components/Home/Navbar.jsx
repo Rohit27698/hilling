@@ -10,7 +10,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-  Popover, PopoverTrigger, PopoverContent,
+  Popover, PopoverTrigger, PopoverContent, Center, Heading,
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -20,38 +20,19 @@ import {
 } from '@chakra-ui/icons';
 import { Link as ReactRouterLink } from 'react-router-dom'; // Import React Router's Link component
 import Logo from "./Images/Logo.jpg";
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useContext } from 'react';
+import { AuthContext } from "../../ContextApi/AuthcontextProvider";
 
 export default function Navbar() {
+  const{isLogged}=useContext(AuthContext)
+  const{logUser}=useContext(AuthContext);
+  const{logout}=useContext(AuthContext);
   const { isOpen, onToggle } = useDisclosure();
-  const [name, setName] = useState("")
+
   const linkColor = useColorModeValue('white', 'gray.200');
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
-  const [auth, setAuth] = useState(false);
-  const [getData, setGetData] = useState([])
-  async function getLoginData() {
-    try {
-      const getItem = await axios.get(`http://localhost:8080/navName`);
-      setAuth(true)
-      setGetData(getItem.data);
-    } catch (error) {
-      
-    }
-  }
-  useEffect(() => {
-    getLoginData()
-  }, [])
-  async function onLogout() { 
-    try {
-      await axios.delete(`http://localhost:8080/navName/1`);
-      setAuth(false)
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  console.log(auth);
+
   return (
     <Box>
       <Flex
@@ -98,43 +79,14 @@ export default function Navbar() {
             />
           </Flex>
         </Flex>
-
+       {
+        !isLogged ? 
         <Stack
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
           direction={'row'}
           spacing={6}
         >
-          {/* changing the name after login --------------------------------------------------------------*/}
-          {auth? 
-          <>
-          <Box
-      display={{ base: 'none', md: 'inline-flex' }}
-      fontSize={'30px'}
-      fontWeight={600}
-      // paddingLeft={'10px'}
-      // paddingRight={'10px'}
-    >
-      👋
-    </Box>
-      <Box
-      display={{ base: 'none', md: 'inline-flex' }}
-      fontSize={'30px'}
-      fontWeight={600}
-      // paddingLeft={'10px'}
-      // paddingRight={'10px'}
-    >
-      {getData.map((e)=>(
-        <h1 key={e.id}>{e.name}</h1>
-
-      ))}
-    </Box>
-    
-    <Button colorScheme="pink" onClick={onLogout}>
-    Logout
-  </Button>
-  </>
-          :   <>
           <Button
             as={'a'}
             fontSize={'sm'}
@@ -158,9 +110,33 @@ export default function Navbar() {
           >
            <ReactRouterLink to="/signup"> Sign Up</ReactRouterLink>
           </Button>
-          
-          </> }
-        </Stack>
+        </Stack>: <Flex
+                as={'a'}
+        fontSize={'sm'}
+        fontWeight={600}
+        variant={'link'}
+        href={'#'}
+        color={"white"}
+        gap={'20px'}
+        alignContent={'center'}
+        textAlign={"center"}>
+          <Heading fontSize={'20px'}
+          mt={'10px'}
+          fontFamily={"popins"} >{logUser}</Heading>
+          <Button  display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
+            color={'white'}
+            bg={'pink.400'}
+            href={'#'}
+            _hover={{
+              bg: 'pink.300',
+            }}
+            onClick={logout}>
+            SignOut
+          </Button>
+        </Flex>
+       }
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
