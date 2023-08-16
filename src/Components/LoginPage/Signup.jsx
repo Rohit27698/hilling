@@ -74,7 +74,7 @@ export default function Signup() {
 
   async function postData() {
     try {
-      await axios.post(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/posts`, newUserData);
+      await axios.post(`https://long-ruby-kingfisher-kilt.cyclic.cloud//posts`, newUserData);
     } catch (error) {
       console.log(error);
     }

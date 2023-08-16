@@ -1,5 +1,5 @@
 {
-  
+  "homepage": ".",
   "name": "hilling",
   "version": "0.1.0",
   "private": true,
@@ -26,6 +26,7 @@
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.8",
     "redux": "^4.2.1",
+    "scrollreveal": "^4.0.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

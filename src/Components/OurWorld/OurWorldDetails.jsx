@@ -30,7 +30,7 @@ const OurWorldDetails = () => {
   }, []);
 
   const fetchData = async () => {
-    const res = await axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/property/${id}`);
+    const res = await axios.get(`https://long-ruby-kingfisher-kilt.cyclic.cloud//property/${id}`);
     setProperty(res.data);
     
   };

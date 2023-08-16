@@ -27,7 +27,7 @@ const OurWorld = () => {
 
 
   const fetchData = async () => {
-    const url = (`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}`)
+    const url = (`https://long-ruby-kingfisher-kilt.cyclic.cloud/`)
     let last = '/property'
     const qp = [];
     if (searchResults) {

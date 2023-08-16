@@ -1,9 +1,9 @@
-
-import React,{useState} from 'react'
+import ScrollReveal from 'scrollreveal';
+import React,{useState,useEffect} from 'react'
 import {Box,  Heading, Text,
   Button,
   Image,Center,IconButton,SlideFade,Input,Divider, 
-  useBreakpointValue,Grid,
+   Grid,
 } from "@chakra-ui/react";
 import {ExternalLinkIcon,
   CalendarIcon,
@@ -13,79 +13,161 @@ import {ExternalLinkIcon,
 } from "@chakra-ui/icons"
 import Nature from "./Images/Nature.jpg"
 import Darjiling from "./Images/Nature Images/Darjiling.jpg"
-import Kasuli from "./Images/Nature Images/Kasuli.jpg"
-import Khandala from "./Images/Nature Images/Khandala.jpeg"
+import Nature2 from "./Images/Nature3.jpg"
+ 
 import KULU_Manali from "./Images//Nature Images/KULU_Manali.jpg"
 import lehladakh from "./Images/Nature Images/leh-ladakh.jpg"
-import Lonawala from "./Images/Nature Images/Lonawala.jpeg"
+ 
 import Nainital from "./Images/Nature Images/Nainital-Hill-Station.webp"
+import Bhrahmtal from "./Images/Nature Images/Bhrahmtal.jpg"
+import ShimLa from "./Images/Nature Images/ShimLa.jpg"
+import Dharamsala from "./Images/Nature Images/Dharamsala.webp"
 import map from "./Images/map.jpg"
 import logo1 from "./Images/ComLogo/logo1.jpg"
 import logo2 from "./Images/ComLogo/logo2.jpg"
 import logo3 from "./Images/ComLogo/logo3.jpg"
 import logo4 from "./Images/ComLogo/logo4.jpg"
+import Maclordganj from "./Images/Nature Images/Maclordganj.jpg"
 import {Link} from "react-router-dom";
-
+import Sikkim from "./Images/Nature Images/Sikkim.jpg"
+import Shillong from"./Images/Nature Images/Shillong.webp"
 const Home = () => {
 
-  const [windowStart, setWindowStart] = useState(0);
+  
 
   const images = [
     Darjiling,
-    Kasuli,
-    Khandala,
-    KULU_Manali,
-    lehladakh,
-    Lonawala,
+    Bhrahmtal,
+    ShimLa,
+     KULU_Manali,
+    Maclordganj,
+     lehladakh,
+    Dharamsala,
     Nainital,
-    Darjiling,
-    Kasuli,
-    Khandala,
-    KULU_Manali,
-    lehladakh,
-    Lonawala,
-    Nainital,
+     Shillong,
+     Sikkim ,
+     
+
+
+     Darjiling,
+     Bhrahmtal,
+     ShimLa,
+      KULU_Manali,
+     Maclordganj,
+      lehladakh,
+     Dharamsala,
+     Nainital,
+      Shillong,
+      Sikkim ,
+
+
+
+
+
+
+      Darjiling,
+      Bhrahmtal,
+      ShimLa,
+       KULU_Manali,
+      Maclordganj,
+       lehladakh,
+      Dharamsala,
+      Nainital,
+       Shillong,
+       Sikkim ,
+
+
+
+
+       Darjiling,
+       Bhrahmtal,
+       ShimLa,
+        KULU_Manali,
+       Maclordganj,
+        lehladakh,
+       Dharamsala,
+       Nainital,
+        Shillong,
+        Sikkim 
+
+    
   ];
 
     
 
-  const windowsize = useBreakpointValue({ base: 1, sm: 2, md: 4 }); 
+   
 
-  const goToPreviousWindow = () => {
-    setWindowStart((prevStart) => Math.max(0, prevStart - windowsize));
-  };
-
-  const goToNextWindow = () => {
-    setWindowStart((prevStart) => Math.min(images.length - windowsize, prevStart + windowsize));
-  };
+ 
 
   const testimonials = [
     {
       name: "Prince Vejeta",
       rating: 5,
       feedback: "I'm Happy because I had a good experience with Healing. Thank you so much.",
+      image: "https://masai-website-images.s3.ap-south-1.amazonaws.com/prateek_6232b84d8b.jpeg"  
     },
     {
       name: "Itachi uchiha",
       rating: 3,
       feedback: "I'm Happy because I had a best experience with Healing. Thank you so much.",
+      image: "https://masai-website-images.s3.ap-south-1.amazonaws.com/keshav_misra_203a893693.jpeg"  
     },
     {
       name: "Madara Uchiha",
       rating: 5,
       feedback: "I'm Happy because I had a cool experience with Healing. Thank you so much.",
+      image: "https://masai-website-images.s3.ap-south-1.amazonaws.com/1614198786109_Ishita_Chanana_d3d8c56ab0.jpg" 
     },
     {
       name: "Obito",
       rating: 4,
       feedback: "I'm Happy because I had an amazing experience with Healing. Thank you so much.",
+      image: "https://masai-website-images.s3.ap-south-1.amazonaws.com/Whats_App_Image_2022_04_15_at_9_02_03_PM_Ankit_Agrawal_4e1586afbf.jpeg" 
     },
     {
       name: "Light Yagami",
       rating: 5,
-      feedback: "I'm Happy because I had best experience with Healing. Thank you so much."
+      feedback: "I'm Happy because I had best experience with Healing. Thank you so much.",
+      image: "https://masai-website-images.s3.ap-south-1.amazonaws.com/dp_Dipankar_Paul_ffd0867780.jpg"  
     }
   ];
+  
+  
+  const windowsize = 4; // Number of images visible in the slider at a time
+  const [windowStart, setWindowStart] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 for moving right, -1 for moving left
+
+
+
+
+
+
+  const nextWindowIndex = (currentWindowIndex) => {
+    let nextIndex = currentWindowIndex + direction * windowsize;
+    if (nextIndex < 0) {
+      nextIndex = images.length - windowsize;
+    } else if (nextIndex >= images.length) {
+      nextIndex = 0;
+    }
+    return nextIndex;
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWindowStart((prevWindowStart) => nextWindowIndex(prevWindowStart));
+    }, 3000); // Change image every 3 seconds
+
+    return () => {
+      clearInterval(interval); // Clear the interval on unmount
+    };
+  }, []);
+  
+
+
+
+
+
+  
 
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -102,29 +184,106 @@ const Home = () => {
     );
   };
 
-  return <Box backgroundColor={"rgb(124, 141, 211)"} marginTop={"-1px"}>
-    <Box paddingTop={"100px"}>
-      <Heading size='2xl' lineHeight={1.3} color={"white"}>
-       Escape From Reality <br /> 
-       Let's Explore The World
-      </Heading>
 
-      <Text color={"white"} marginTop={"40px"}>
-        Get amazing experience here, no matter where in the world you want to go, <br />
-        we can help you go there anytime.
-      </Text>
+  useEffect(() => {
+    const scrollAnimation = ScrollReveal({
+      origin: 'top',
+      distance: '80px',
+      duration: 2000,
+      reset: true,
+    });
 
-      <Button leftIcon={<ExternalLinkIcon />} backgroundColor={"orange"} color={"white"} padding={"2px"} width={"150px"} borderRadius={"10px"}
-      marginTop={"50px"}
-      >
-     <Link to="/ourworlds"> Book a Trip</Link>
-      </Button>
-      
-      <Image src={Nature} alt='nature_one' width={"100%"}></Image>
-    </Box>
     
-    <Box backgroundColor={"rgb(26, 29, 46)"} >
-      <Box  paddingTop={"150px"}>
+    scrollAnimation.reveal('.animate-me', { delay: 100 }); // Apply animation to elements with the class 'animate-me'
+
+    return () => {
+      scrollAnimation.destroy();
+    };
+  }, []);
+
+
+  useEffect(() => {
+    const scrollAnimation = ScrollReveal({
+      origin: 'right',
+      distance: '80px',
+      duration: 2000,
+      reset: true,
+    });
+
+    
+    scrollAnimation.reveal('.animate-meR', { delay: 100 }); // Apply animation to elements with the class 'animate-me'
+
+    return () => {
+      scrollAnimation.destroy();
+    };
+  }, []);
+
+
+
+
+
+  return <Box  className='animate-me'  background="linear-gradient(135deg, #77B9DE, #3F87E0)" marginTop={"-1px"}>
+   <Box   style={{ 
+  
+  marginTop: "-5px",
+  backgroundImage: `url(${Nature})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  
+}}>
+ <Box className='animate-me' paddingBottom="400px" paddingTop="150px">
+  <Heading
+    size='2xl'
+    paddingTop="20px"
+    lineHeight={1.3}
+    color="white"
+    fontFamily="Arial, sans-serif"
+    textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+    textAlign="center"
+  >
+    <span style={{ color: "#FFA500", fontSize: "150%", fontWeight: "bold" }}>Embarking on</span> a Hillstation Adventure
+  </Heading>
+
+  <Text
+    color="white"
+    marginTop="40px"
+    fontFamily="Arial, sans-serif"
+    textShadow="1px 1px 2px rgba(0, 0, 0, 0.3)"
+    textAlign="center"
+  >
+    Get an amazing experience here, no matter where in the world you want to go, <br />
+    we can help you go there anytime.
+  </Text>
+
+  <Button
+    leftIcon={<ExternalLinkIcon />}
+    backgroundColor="orange"
+    color="white"
+    padding="2px"
+    width="150px"
+    borderRadius="10px"
+    marginTop="50px"
+    fontFamily="Arial, sans-serif"
+  >
+    <Link to="/ourworlds">Book a Trip</Link>
+  </Button>
+</Box>
+
+    </Box>    
+
+
+
+
+
+
+ 
+         
+    
+   
+   
+   
+    <Box   backgroundColor={"rgb(26, 29, 46)"} >
+      <Box      className='animate-me' paddingTop={"150px"}>
         <Text color={"rgba(7,89,145,255)"}>Get Amazing Experience</Text>
         <Heading size={"lg"} color={"white"} paddingTop={"10px"}>Find Travel Perfection</Heading>
         <Text fontSize={"sm"} color={"white"} paddingTop={"25px"}>Bibendum pharetra faucibus at sapien a faucibus vitae senectus <br />
@@ -132,23 +291,23 @@ const Home = () => {
         </Text>
       </Box>
 
-      <Box width={"100%"} display={"flex"}
+      <Box    className='animate-me'  width={"100%"} display={"flex"}
       flexDirection={{ base: 'column', md: 'row' }}
       justifyContent={"space-evenly"} marginTop={"50px"} padding={"30px"}
       gap={{ base: "20px", md: "10px" }}
       >
         
-        <Box boxShadow='xs' p='6' rounded='md' bg='rgb(26, 29, 60)'
+        <Box    className='animate-me'  boxShadow='xs' p='6' rounded='md' bg='rgb(26, 29, 60)'
         padding={{ base: "20px", md: "40px" }}
         flex={{ base: "none", md: "1" }}
         maxWidth={{ base: "none", md: "350px" }}
         >
-          <Center>
-            <Box borderRadius={"18px"} backgroundColor={"gray"} 
+          <Center  className='animate-me' >
+            <Box    className='animate-me' borderRadius={"18px"} backgroundColor={"gray"} 
              width={{ base: "16%", md: "20%" }}
              height={"45px"}
               display="flex" justifyContent="center" alignItems="center" >
-              <CalendarIcon/>
+              <CalendarIcon  />
             </Box>
           </Center>
           <br />
@@ -201,64 +360,73 @@ const Home = () => {
         </Box>
       </Box>
 
+      <Box 
+  background={`url(${Nature2})`}
+  backgroundSize="cover"
+  backgroundPosition="center"
+  boxShadow="0px 4px 10px rgba(0, 0, 0, 0.25)"
+  borderRadius="10px"
+  padding="20px"
+  textAlign="center"
+  color="white"
+>
+  <Text  className='.animate-me' fontSize="24px" fontWeight="bold" marginBottom="10px">
+    Popular Destinations
+  </Text>
+  <Box   className='.animate-me' display="flex" justifyContent="center" alignItems="center">
+    <Heading fontSize="20px">Recommended Destinations</Heading>
+  </Box>
+  <SlideFade in offsetY="20px">
+    <Box
+     className='.animate-meR'
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      padding="40px"
+      width="100%"
+      flexWrap="wrap"
+    >
+      {images.slice(windowStart, windowStart + windowsize).map((image, index) => (
+        <Box  className='.animate-meR'
+          key={index}
+          width="300px"
+          height="400px"
+          borderRadius="10px"
+          overflow="hidden"
+          boxShadow="0px 4px 10px rgba(0, 0, 0, 0.25)"
+          marginBottom="20px"
+          mx="10px"
+        >
+          <img
+            src={image}
+            alt={`${windowStart + index + 1}`}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </Box>
+      ))}
+    </Box>
+  </SlideFade>
+</Box>
 
-      <Box>
-        <Text>Popular Destination</Text>
-        <Box display={"flex"} justifyContent={"space-around"}>
-          <Heading color={"white"}>Recommended Destination</Heading>
-            <Box display={"flex"}>
-            <IconButton
-              icon={<ChevronLeftIcon />}
-              onClick={goToPreviousWindow}
-              aria-label="Previous"
-              mr={2}
-            />
-            <IconButton
-              icon={<ChevronRightIcon />}
-              onClick={goToNextWindow}
-              aria-label="Next"
-              ml={2}
-            />
-            </Box>
-          </Box>
-          <SlideFade in offsetY="20px">
-          <Box display="flex" padding={"40px"} windowsize={"100%"}>
-            {images.slice(windowStart, windowStart + windowsize).map((image, index) => (
-              <Box
-                key={index}
-                mr={10}
-                width="300px"
-                height="400px"
-                style={{ position: 'relative' }}
-              >
-                <img
-                  src={image}
-                  alt={`Image ${windowStart + index + 1}`}
-                  style={{ width: '100%', height: '100%' }}
-                />
-              </Box>
-            ))}
-          </Box>
-        </SlideFade>
-      </Box>
 
-      <Box display={"flex"} flexDirection={{ base: "column", md: "row" }}
+
+      <Box    display={"flex"} flexDirection={{ base: "column", md: "row" }}
         marginTop={{ base: "50px", md: "100px" }}
         padding={{ base: "0", md: "20px" }}
         color={"white"}
         justifyContent={"space-evenly"}
         alignItems={{ base: "center", md: "initial" }}
       >
-        <Box
+        <Box  className='animate-meL'
         width={{ base: "100%", md: "auto" }} maxWidth={{ base: "none", md: "50%" }}
         >
           <Image src={map}/>
         </Box>
 
-        <Box 
+        <Box   className='animate-meR'
         textAlign={{ base: "center", md: "left" }} marginTop={{ base: "40px", md: "0" }}
         >
-          <Text color={"rgba(7,89,145,255)"}>Benefits</Text>
+          <Text color={"white"}>Benefits</Text>
           <br />
           <Heading size={"lg"}>Our Team Already Available <br/>
               All Over the World
@@ -284,90 +452,109 @@ const Home = () => {
         </Box>
       </Box>
 
-      <Box marginTop={"100px"} display={"flex"} justifyContent={"center"} alignContent={"center"} flexDirection={{ base: "column", md: "row" }} gap={"100px"}>
-      <Box>
-        <Text color={"rgba(7,89,145,255)"}>Testimonials</Text>
-        <br />
-        <Heading color={"white"}>What People Say <br /> About Our Services</Heading>
-        <br />
-        <Box display="flex" alignItems="center" justifyContent="center">
-          <IconButton
-            icon={<ChevronLeftIcon />}
-            onClick={goToPreviousSlide}
-            aria-label="Previous"
-            mr={2}
-            display={{ base: "none", md: "flex" }}
-          />
-          <IconButton
-            icon={<ChevronRightIcon />}
-            onClick={goToNextSlide}
-            aria-label="Next"
-            ml={2}
-            display={{ base: "none", md: "flex" }}
-          />
-          <Box flexGrow={1} textAlign="center">
-            <Text color={"white"}>There are many Variations</Text>
-          </Box>
-        </Box>
-      </Box>
-
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gap={4}
-      >
-        {testimonials.map((testimonial, index) => (
-          <Box
-            key={index}
-            padding="20px"
-            textAlign="left"
-            display={index === currentSlide ? "block" : "none"}
-            boxShadow='2xl'
-            p='6'
-          >
-            <Box
-              borderRadius={"18px"}
-              backgroundColor={"gray"}
-              width={"10%"}
-              height={"45px"}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <ChatIcon/>
-            </Box>
-            <br />
-            <Text color={"white"}>{testimonial.name}</Text> <br />
-            <Box display={"flex"} color={"white"}>
-              {[...Array(testimonial.rating)].map((_, i) => (
-                <SunIcon key={i} />
-              ))}
-            </Box>{" "}
-            <br />
-            <Text color={"white"} fontSize={"sm"}>
-              {testimonial.feedback}
-            </Text>
-          </Box>
-        ))}
-      </Box>
-
-      <Box
-        display={{ base: "flex", md: "none" }}
-        justifyContent="center"
-        marginTop={"10px"}
-        
-      >
-        <IconButton
-          icon={<ChevronLeftIcon />}
-          onClick={goToPreviousSlide}
-          aria-label="Previous"
-          mr={2}
-        />
-        <IconButton icon={<ChevronRightIcon />} onClick={goToNextSlide} aria-label="Next" ml={2} />
+      <Box className='animate-me' marginTop={"100px"} display={"flex"} justifyContent={"center"} alignContent={"center"} flexDirection={{ base: "column", md: "row" }} gap={"100px"}>
+  <Box>
+    <Text color={"rgba(7,89,145,255)"}>Testimonials</Text>
+    <br />
+    <Heading color={"white"}>What People Say <br /> About Our Services</Heading>
+    <br />
+    <Box display="flex" alignItems="center" justifyContent="center">
+      <IconButton
+        icon={<ChevronLeftIcon />}
+        onClick={goToPreviousSlide}
+        aria-label="Previous"
+        mr={2}
+        display={{ base: "none", md: "flex" }}
+      />
+      <IconButton
+        icon={<ChevronRightIcon />}
+        onClick={goToNextSlide}
+        aria-label="Next"
+        ml={2}
+        display={{ base: "none", md: "flex" }}
+      />
+      <Box flexGrow={1} textAlign="center">
+        <Text color={"white"}>There are many Variations</Text>
       </Box>
     </Box>
+  </Box>
+  <Box
+  display="grid"
+  gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+  gap={4}
+>
+  {testimonials.map((testimonial, index) => (
+    <Box
+      key={index}
+      padding="20px"
+      textAlign="left"
+      display={index === currentSlide ? "block" : "none"}
+      boxShadow="2xl"
+      p="6"
+      position="relative"
+      overflow="hidden"
+    >
+      <Box
+        position="absolute"
+        top="10px"
+        right="10px"
+        borderRadius="full"
+        overflow="hidden"
+        boxSize="150px"
+        zIndex="1"
+      >
+        <Image
+          src={testimonial.image} // Replace with the actual image URLs
+          alt={`Customer ${index + 1}`}
+          objectFit="cover"
+          boxSize="100%"
+          
+        />
+      </Box>
+      <Box
+        borderRadius={"18px"}
+        backgroundColor={"gray"}
+        width={"20%"}
+        height={"45px"}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ChatIcon />
+      </Box>
+      <br />
+      <Text color={"white"}>{testimonial.name}</Text> <br />
+      <Box display={"flex"} color={"white"}>
+        {[...Array(testimonial.rating)].map((_, i) => (
+          <SunIcon key={i} />
+        ))}
+      </Box>{" "}
+      <br />
+      <Text color={"white"} fontSize={"sm"}>
+        {testimonial.feedback}
+      </Text>
+    </Box>
+  ))}
+</Box>
 
-    <Box marginTop={{ base: "100px", md: "50px" }} textAlign="center">
+
+  <Box
+    display={{ base: "flex", md: "none" }}
+    justifyContent="center"
+    marginTop={"10px"}
+  >
+    <IconButton
+      icon={<ChevronLeftIcon />}
+      onClick={goToPreviousSlide}
+      aria-label="Previous"
+      mr={2}
+    />
+    <IconButton icon={<ChevronRightIcon />} onClick={goToNextSlide} aria-label="Next" ml={2} />
+  </Box>
+</Box>
+
+
+    <Box    className='animate-me' marginTop={{ base: "100px", md: "50px" }} textAlign="center">
       <Text color="rgba(7, 89, 145, 255)">Subscription</Text>
       <Heading color="white" marginTop="20px" marginBottom="10px">
         Join Our Community to Get the Best Price

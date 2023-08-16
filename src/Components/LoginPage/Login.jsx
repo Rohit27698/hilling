@@ -28,7 +28,7 @@ export default function Login() {
 
   async function getLoginData() {
     try {
-      const getItem = await axios.get(`http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}/posts`);
+      const getItem = await axios.get(`https://long-ruby-kingfisher-kilt.cyclic.cloud//posts`);
       setGetData(getItem.data);
     } catch (error) {
       console.log(error);
