@@ -1,4 +1,5 @@
 import ScrollReveal from 'scrollreveal';
+import { Link as ReactRouterLink } from 'react-router-dom';
 import React,{useState,useEffect} from 'react'
 import {Box,  Heading, Text,
   Button,
@@ -31,6 +32,8 @@ import Maclordganj from "./Images/Nature Images/Maclordganj.jpg"
 import {Link} from "react-router-dom";
 import Sikkim from "./Images/Nature Images/Sikkim.jpg"
 import Shillong from"./Images/Nature Images/Shillong.webp"
+ 
+
 const Home = () => {
 
   
@@ -131,6 +134,50 @@ const Home = () => {
       image: "https://masai-website-images.s3.ap-south-1.amazonaws.com/dp_Dipankar_Paul_ffd0867780.jpg"  
     }
   ];
+
+const ourTeam = [
+  {
+    name: "Rohit Kharwar",
+    position: "Full Stack Developer",
+    company: "Zentech",
+    image: "https://drive.google.com/uc?export=view&id=1CBZfCuVCd5Z10CYEam0wiMaZNZHlEEMH",
+    
+  },
+  {
+    name: "Indraeet Gupta",
+    position: "Full Stack Android Developer",
+    company: "Airtel",
+    image: "https://drive.google.com/uc?export=view&id=1g4tjTpoUiImN7d2JHzVrFxIqe5Ljtw0O"  
+  },
+  {
+    name: "Bharatveer Singh",
+    position: "Frontend Developer",
+    company: "Wipro",
+    image: "https://drive.google.com/uc?export=view&id=1jaNWoyxyU0ath3LI5Y-HaqdVCF_6KoQS"
+     
+  },
+  {
+    name: "Saif Khan",
+    position: "Backend Developer",
+    company: "SISCO",
+    image: "https://drive.google.com/uc?export=view&id=1yd3kAyRANOAmManRH-0KpE5HEJF3mGyK"
+   
+  },
+  {
+    name: "Asif Wali",
+    position: "Sr. Software-Developer",
+    company: "Udacity",
+    image: "https://drive.google.com/uc?export=view&id=1qh3LgE2fpHOPTs6SqVbs-FstKMtdvo75"
+    
+  },
+];
+
+
+
+
+
+
+
   
   
   const windowsize = 4; // Number of images visible in the slider at a time
@@ -279,86 +326,161 @@ const Home = () => {
  
          
     
-   
-   
-   
-    <Box   backgroundColor={"rgb(26, 29, 46)"} >
-      <Box      className='animate-me' paddingTop={"150px"}>
-        <Text color={"rgba(7,89,145,255)"}>Get Amazing Experience</Text>
-        <Heading size={"lg"} color={"white"} paddingTop={"10px"}>Find Travel Perfection</Heading>
-        <Text fontSize={"sm"} color={"white"} paddingTop={"25px"}>Bibendum pharetra faucibus at sapien a faucibus vitae senectus <br />
-        morbi consequat sed orci, vulputate id pellentesque 
+   {/*2 Main Box */}
+    
+    
+    <Box backgroundColor="rgb(26, 29, 46)">
+      <Box className='animate-me' paddingTop="150px" textAlign="center">
+        <Text color="rgba(7, 89, 145, 255)">Get Amazing Experience</Text>
+        <Heading size="lg" color="white" paddingTop="10px">
+          Find Travel Perfection
+        </Heading>
+        <Text fontSize="sm" color="white" paddingTop="25px">
+          Bibendum pharetra faucibus at sapien a faucibus vitae senectus <br />
+          morbi consequat sed orci, vulputate id pellentesque
         </Text>
       </Box>
 
-      <Box    className='animate-me'  width={"100%"} display={"flex"}
-      flexDirection={{ base: 'column', md: 'row' }}
-      justifyContent={"space-evenly"} marginTop={"50px"} padding={"30px"}
-      gap={{ base: "20px", md: "10px" }}
+      <Box
+        className='animate-me'
+        width="100%"
+        display="flex"
+        flexDirection={{ base: 'column', md: 'row' }}
+        justifyContent="space-evenly"
+        marginTop="50px"
+        padding="30px"
+        gap={{ base: "20px", md: "10px" }}
       >
-        
-        <Box    className='animate-me'  boxShadow='xs' p='6' rounded='md' bg='rgb(26, 29, 60)'
-        padding={{ base: "20px", md: "40px" }}
-        flex={{ base: "none", md: "1" }}
-        maxWidth={{ base: "none", md: "350px" }}
-        >
-          <Center  className='animate-me' >
-            <Box    className='animate-me' borderRadius={"18px"} backgroundColor={"gray"} 
-             width={{ base: "16%", md: "20%" }}
-             height={"45px"}
-              display="flex" justifyContent="center" alignItems="center" >
-              <CalendarIcon  />
-            </Box>
-          </Center>
-          <br />
-          <Link to="/ourworlds"><Heading color={"white"} size={"lg"}>Schedule a Plan</Heading> <br /></Link>
-          <Text color={"white"} fontSize={"small"}>Quis pretium placerat morbi <br />
-            morbi arcu non lobortis neque, porta <br />
-            ligula platea eget ultricies.
-          </Text>
-        </Box>
+        {/* Schedule a Plan */}
+        <Link as={ReactRouterLink} to="/ourworlds">
+          <Box
+            className='animate-me'
+            boxShadow='xs'
+            p='6'
+            rounded='md'
+            bg='rgb(26, 29, 60)'
+            padding={{ base: "20px", md: "40px" }}
+            flex={{ base: "none", md: "1" }}
+            maxWidth={{ base: "none", md: "350px" }}
+            _hover={{ transform: 'scale(1.1)' }}
+            transition="transform 0.3s"
+          >
+            <Center className='animate-me'>
+              <Box
+                className='animate-me'
+                borderRadius="18px"
+                backgroundColor="gray"
+                width={{ base: "16%", md: "20%" }}
+                height="45px"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <CalendarIcon />
+              </Box>
+            </Center>
+            <br />
+            <Heading color="white" size="lg">
+              Schedule a Plan
+            </Heading>{' '}
+            <br />
+            <Text color="white" fontSize="small">
+              Quis pretium placerat morbi <br />
+              morbi arcu non lobortis neque, porta <br />
+              ligula platea eget ultricies.
+            </Text>
+          </Box>
+        </Link>
 
-        <Box boxShadow='xs' p='6' rounded='md' bg='rgb(26, 29, 60)'
-         padding={{ base: "20px", md: "40px" }}
-         flex={{ base: "none", md: "1" }}
-         maxWidth={{ base: "none", md: "350px" }}
-        >
-          <Center>
-            <Box borderRadius={"18px"} backgroundColor={"gray"} 
-             width={{ base: "16%", md: "20%" }}
-             height={"45px"}
-              display="flex" justifyContent="center" alignItems="center" >
-              <SearchIcon/>
-            </Box>
-          </Center>
-          <br />
-          <Link to="/ourworlds"><Heading color={"white"} size={"lg"}>Find a Destination</Heading> <br /></Link>
-          <Text color={"white"} fontSize={"small"}>Luctus ac et egestas sagittis a<br />
-            nulla mauris id turpis vitae erat nibh <br />
-            gravida convallis lorem.
-          </Text>
-        </Box>
+        {/* Find a Destination */}
+        <Link as={ReactRouterLink} to="/ourworlds">
+          <Box
+            boxShadow='xs'
+            p='6'
+            rounded='md'
+            bg='rgb(26, 29, 60)'
+            padding={{ base: "20px", md: "40px" }}
+            flex={{ base: "none", md: "1" }}
+            maxWidth={{ base: "none", md: "350px" }}
+            _hover={{ transform: 'scale(1.1)' }}
+            transition="transform 0.3s"
+          >
+            <Center>
+              <Box
+                borderRadius="18px"
+                backgroundColor="gray"
+                width={{ base: "16%", md: "20%" }}
+                height="45px"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <SearchIcon />
+              </Box>
+            </Center>
+            <br />
+            <Heading color="white" size="lg">
+              Find a Destination
+            </Heading>{' '}
+            <br />
+            <Text color="white" fontSize="small">
+              Luctus ac et egestas sagittis a<br />
+              nulla mauris id turpis vitae erat nibh <br />
+              gravida convallis lorem.
+            </Text>
+          </Box>
+        </Link>
 
-        <Box boxShadow='xs' p='6' rounded='md' bg='rgb(26, 29, 60)'
-        padding={{ base: "20px", md: "40px" }}
-        flex={{ base: "none", md: "1" }}
-        maxWidth={{ base: "none", md: "350px" }}
-        >
-          <Center>
-            <Box borderRadius={"18px"} backgroundColor={"gray"} width={{ base: "16%", md: "20%" }}
-             height={"45px"}
-              display="flex" justifyContent="center" alignItems="center" >
-              <SunIcon/>
-            </Box>
-          </Center>
-          <br />
-          <Link to="/ourworlds"> <Heading color={"white"} size={"lg"}>Enjoy Your Trip</Heading> <br /></Link>
-          <Text color={"white"} fontSize={"small"}>Ligula dui sit integer vestibulum, Facilisis <br />
-            et viverra volutpat mollis leo sapien <br />
-            mauris nulla marcu.
-          </Text>
-        </Box>
+        {/* Enjoy Your Trip */}
+        <Link as={ReactRouterLink} to="/ourworlds">
+          <Box
+            boxShadow='xs'
+            p='6'
+            rounded='md'
+            bg='rgb(26, 29, 60)'
+            padding={{ base: "20px", md: "40px" }}
+            flex={{ base: "none", md: "1" }}
+            maxWidth={{ base: "none", md: "350px" }}
+            _hover={{ transform: 'scale(1.1)' }}
+            transition="transform 0.3s"
+          >
+            <Center>
+              <Box
+                borderRadius="18px"
+                backgroundColor="gray"
+                width={{ base: "16%", md: "20%" }}
+                height="45px"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <SunIcon />
+              </Box>
+            </Center>
+            <br />
+            <Heading color="white" size="lg">
+              Enjoy Your Trip
+            </Heading>{' '}
+            <br />
+            <Text color="white" fontSize="small">
+              Ligula dui sit integer vestibulum, Facilisis <br />
+              et viverra volutpat mollis leo sapien <br />
+              mauris nulla marcu.
+            </Text>
+          </Box>
+        </Link>
       </Box>
+ 
+ 
+
+
+ 
+
+
+
+
+
+
 
       <Box 
   background={`url(${Nature2})`}
@@ -407,6 +529,12 @@ const Home = () => {
     </Box>
   </SlideFade>
 </Box>
+
+   
+
+
+
+
 
 
 
@@ -479,6 +607,7 @@ const Home = () => {
     </Box>
   </Box>
   <Box
+  className='animate-me'
   display="grid"
   gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
   gap={4}
@@ -552,6 +681,73 @@ const Home = () => {
     <IconButton icon={<ChevronRightIcon />} onClick={goToNextSlide} aria-label="Next" ml={2} />
   </Box>
 </Box>
+
+
+ 
+
+{/*our Team Box */}
+
+(
+    <Box 
+      className='animate-me'
+      display="flex" flexDirection="column" alignItems="center" marginTop="100px">
+      <Text  className='animate-me' color="rgba(7,89,145,255)">Our Team</Text>
+      <br />
+      <Heading   marginTop={"20px"} className='animate-me' color="white">Meet Our Awesome Team</Heading>
+      <br />
+      <Box marginTop={"20px"} display="flex" justifyContent="center" alignItems="center" flexWrap="wrap">
+        {ourTeam.map((member, index) => (
+          <Box
+            key={index}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            textAlign="center"
+            margin="10px"
+            minWidth="280px" // Set a minimum width to prevent too narrow boxes
+          >
+            <Box
+              width="150px"
+              height="150px"
+              borderRadius="50%"
+              overflow="hidden"
+              backgroundColor="gray.800"
+              marginBottom="10px"
+            >
+              <Image
+                src={member.image}
+                alt={`Team Member ${index + 1}`}
+                objectFit="cover"
+                width="100%"
+                height="100%"
+              />
+            </Box>
+            <Text color="white" fontSize="lg" fontWeight="bold">
+              {member.name}
+            </Text>
+            <Text color="white" fontSize="md">{member.position}</Text>
+            <Text color="white" fontSize="md">
+              {member.company}
+            </Text>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <Box    className='animate-me' marginTop={{ base: "100px", md: "50px" }} textAlign="center">
