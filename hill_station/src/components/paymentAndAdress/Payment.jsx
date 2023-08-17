@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Box, FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import './Payment.css'
+import { useNavigate } from 'react-router-dom';
 
 const Payment = (  ) => {
+  const nav=useNavigate()
   const [cardNumber, setCardNumber] = useState('');
   const [cardHolder, setCardHolder] = useState('');
   const [expiry, setExpiry] = useState('');
@@ -24,7 +26,7 @@ const Payment = (  ) => {
 
   
   const handleClick=()=>{
-    window.open("./LoadingPage",'_self')
+    nav("/LoadingPage")
     console.log("clicked")
   }
  
@@ -33,19 +35,6 @@ const Payment = (  ) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    // const addressData = {
-    //   firstName,
-    //   lastName,
-    //   phoneNumber,
-    //   dateOfBirth,
-    //   email,
-    //   address,
-    //   street,
-    //   city,
-    //   state,
-    //   zipcode,
-    // };
-    // // onNext(addressData);
   };
   return (
     <div id='page'>
